@@ -26,9 +26,18 @@ function App() {
   const handleNewGame = () => {
     const INITIAL_GAME_BOARD = new Array(36).fill(null);
 
+    const hiddenColors = [...game.hiddenColors];
+    hiddenColors.forEach((color, i) => {
+      do {
+        const index = Math.floor(Math.random() * 6);
+        color = INITIAL_COLORS[index];
+      } while (hiddenColors.includes(color));
+      hiddenColors[i] = color;
+    });
+
     setGame({
       roundCount: 0,
-      hiddenColors: [null, null, null, null],
+      hiddenColors: hiddenColors,
       gameBoard: INITIAL_GAME_BOARD,
       responses: INITIAL_GAME_BOARD,
     });
