@@ -13,9 +13,7 @@ const ControlPanel = ({ onColorPick, onNewGame, colors, visible }) => {
             id={color}
             className={color + (visible ? "" : " hidden")}
             onClick={onColorPick}
-          >
-            {color}
-          </button>
+          ></button>
         ))}
       </div>
     </div>
