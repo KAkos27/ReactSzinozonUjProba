@@ -1,6 +1,6 @@
 import "./ControlPanel.css";
 
-const ControlPanel = ({ onColorPick, onNewGame, colors }) => {
+const ControlPanel = ({ onColorPick, onNewGame, colors, visible }) => {
   return (
     <div className="control-panel">
       <button id="new-game" onClick={onNewGame}>
@@ -11,7 +11,7 @@ const ControlPanel = ({ onColorPick, onNewGame, colors }) => {
           <button
             key={"b" + i}
             id={color}
-            className={color}
+            className={color + (visible ? "" : " hidden")}
             onClick={onColorPick}
           >
             {color}

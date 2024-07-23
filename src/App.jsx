@@ -8,8 +8,25 @@ import { INITIAL_GAME_STATUS } from "./initialGameStatus.js";
 
 const INITIAL_COLORS = ["red", "blue", "green", "yellow", "orange", "purple"];
 
-const checkForGameEnd = () => {
-  console.log("asd");
+const checkForGameEnd = (game) => {
+  if (
+    game.responses[game.roundCount - 1] === "black" &&
+    game.responses[game.roundCount - 2] === "black" &&
+    game.responses[game.roundCount - 3] === "black" &&
+    game.responses[game.roundCount - 4] === "black"
+  ) {
+    game.visible = true;
+    setTimeout(() => {
+      alert("Győzelem");
+    }, 1);
+  } else if (game.roundCount === 36) {
+    game.visible = true;
+    setTimeout(() => {
+      alert("Vereség");
+    }, 1);
+  }
+
+  return game;
 };
 
 function App() {
@@ -38,7 +55,9 @@ function App() {
       if (updatedGame.rowCount === 4) {
         updatedGame.rowCount = 0;
       }
-      return updatedGame;
+
+      const checkedGame = checkForGameEnd(updatedGame);
+      return checkedGame;
     });
   };
 
@@ -59,6 +78,7 @@ function App() {
     setGame({
       roundCount: 0,
       rowCount: 0,
+      visible: false,
       hiddenColors: hiddenColors,
       gameBoard: INITIAL_GAME_BOARD,
       responsesToAdd: INITIAL_RESPONSES_TO_ADD,
@@ -68,13 +88,14 @@ function App() {
 
   return (
     <div className="app">
-      <HiddenColors hiddenColors={game.hiddenColors} />
+      <HiddenColors hiddenColors={game.hiddenColors} visible={game.visible} />
       <ResponseBar responses={game.responses} />
       <GameBoard board={game.gameBoard} />
       <ControlPanel
         onColorPick={handleColorPick}
         onNewGame={handleNewGame}
         colors={INITIAL_COLORS}
+        visible={!game.visible}
       />
     </div>
   );
