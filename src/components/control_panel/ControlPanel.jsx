@@ -3,11 +3,9 @@ import "./ControlPanel.css";
 const ControlPanel = ({ onColorPick, onNewGame, colors }) => {
   return (
     <div className="control-panel">
-      <div className="new-game-container">
-        <button id="new-game" onClick={onNewGame}>
-          Új Játék!
-        </button>
-      </div>
+      <button id="new-game" onClick={onNewGame}>
+        Új Játék!
+      </button>
       <div className="colors">
         {colors.map((color, i) => (
           <button

@@ -4,9 +4,7 @@ const GameBoard = ({ board }) => {
   return (
     <div className="game-board">
       {board.map((square, i) => (
-        <span key={"s" + i} className={square}>
-          asd
-        </span>
+        <span key={"s" + i} className={square}></span>
       ))}
     </div>
   );
