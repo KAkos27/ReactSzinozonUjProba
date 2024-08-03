@@ -9,21 +9,22 @@ import { INITIAL_GAME_STATUS } from "./initialGameStatus.js";
 const INITIAL_COLORS = ["red", "blue", "green", "yellow", "orange", "purple"];
 
 const checkForGameEnd = (game) => {
+  const gameEndHandler = (gameEndMessage) => {
+    game.visible = true;
+    setTimeout(() => {
+      alert(gameEndMessage);
+    }, 1);
+  };
+
   if (
     game.responses[game.roundCount - 1] === "black" &&
     game.responses[game.roundCount - 2] === "black" &&
     game.responses[game.roundCount - 3] === "black" &&
     game.responses[game.roundCount - 4] === "black"
   ) {
-    game.visible = true;
-    setTimeout(() => {
-      alert("Győzelem");
-    }, 1);
+    gameEndHandler("Győzelem");
   } else if (game.roundCount === 36) {
-    game.visible = true;
-    setTimeout(() => {
-      alert("Vereség");
-    }, 1);
+    gameEndHandler("Vereség");
   }
 
   return game;
